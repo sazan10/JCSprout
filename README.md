@@ -1,7 +1,7 @@
 
 <div align="center">  
 
-<img src="https://ws1.sinaimg.cn/large/0069RVTdly1fubocn5pxaj30go082dg1.jpg" width=""/> 
+<img src="https://s2.loli.net/2024/05/17/D8brxzCPh5vpOFk.png" width=""/> 
 <br/>
 
 [![Build Status](https://travis-ci.org/crossoverJie/JCSprout.svg?branch=master)](https://travis-ci.org/crossoverJie/JCSprout)
@@ -18,6 +18,15 @@
 **访问这里获取更好的阅读体验**：[https://crossoverjie.top/JCSprout/](https://crossoverjie.top/JCSprout/)
 
 <br/>
+
+<div align="center">  
+
+<a href="https://t.zsxq.com/odQDJ" target="_blank"><img src="https://s2.loli.net/2024/05/17/zRkabDu2SKfChLX.png" alt="202405171520366.png"></a>
+</div>
+
+最近开通了知识星球，感谢大家对 `JCSprout` 的支持，为大家提供 100 份 10 元优惠券，也就是 69-10=59 元，具体福利大家可以扫码参考再决定是否加入。
+
+> PS: 后续会继续维护该项目，同时加入现在热门的 Golang/kubernetes/OpenTelemetry 等知识点，感兴趣的可以加入星球当面催更（当然内容也会更新到这个项目里）。
 
 
 | 📊 |⚔️ | 🖥 | 🚏 | 🏖  | 🌁| 📮 | 🔍 | 🚀 | 🌈 |💡
