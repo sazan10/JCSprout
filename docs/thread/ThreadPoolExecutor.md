@@ -1,10 +1,10 @@
-![](https://i.loli.net/2019/05/08/5cd1d2a867bea.jpg)
+
 
 ## 前言
 
 平时接触过多线程开发的童鞋应该都或多或少了解过线程池，之前发布的《阿里巴巴 Java 手册》里也有一条：
 
-![](https://i.loli.net/2019/05/08/5cd1d2a8dad64.jpg)
+![](https://s2.loli.net/2024/05/21/H7oVe3Xqz8c2pWJ.png)
 
 可见线程池的重要性。
 
@@ -26,7 +26,6 @@
 - `Executors.newFixedThreadPool(nThreads)`：创建固定大小的线程池。
 - `Executors.newSingleThreadExecutor()`：创建单个线程的线程池。
 
-<!--more-->
 
 其实看这三种方式创建的源码就会发现：
 
@@ -68,7 +67,8 @@ threadPool.execute(new Job());
 
 在具体分析之前先了解下线程池中所定义的状态，这些状态都和线程的执行密切相关：
 
-![](https://i.loli.net/2019/05/08/5cd1d2a9bc566.jpg)
+![](https://s2.loli.net/2024/05/21/Kf7kDlFUQy816eV.png)
+
 
 - `RUNNING` 自然是运行状态，指可以接受任务执行队列里的任务
 - `SHUTDOWN` 指调用了 `shutdown()` 方法，不再接受新任务了，但是队列里的任务得执行完毕。
@@ -78,22 +78,25 @@ threadPool.execute(new Job());
 
 用图表示为：
 
-![](https://i.loli.net/2019/05/08/5cd1d2aa81655.jpg)
+![](https://s2.loli.net/2024/05/21/U2tQ3RWN5CnaquJ.png)
+
 
 然后看看 `execute()` 方法是如何处理的：
 
-![](https://i.loli.net/2019/05/08/5cd1d2ab921db.jpg)
+![](https://s2.loli.net/2024/05/21/Fa6ogDun8wkbAes.png)
+
 
 1. 获取当前线程池的状态。
 2. 当前线程数量小于 coreSize 时创建一个新的线程运行。
 3. 如果当前线程处于运行状态，并且写入阻塞队列成功。
-4. 双重检查，再次获取线程状态；如果线程状态变了（非运行状态）就需要从阻塞队列移除任务，并尝试判断线程是否全部执行完毕。同时执行拒绝策略。
+4. 双重检查，再次获取线程池状态；如果线程池状态变了（非运行状态）就需要从阻塞队列移除任务，并尝试判断线程是否全部执行完毕。同时执行拒绝策略。
 5. 如果当前线程池为空就新创建一个线程并执行。
 6. 如果在第三步的判断为非运行状态，尝试新建线程，如果失败则执行拒绝策略。
 
 这里借助《聊聊并发》的一张图来描述这个流程：
 
-![](https://i.loli.net/2019/05/08/5cd1d2ac0936c.jpg)
+![](https://s2.loli.net/2024/05/21/hNXE42uOroLlDRY.png)
+
 
 
 ### 如何配置线程
@@ -104,7 +107,7 @@ threadPool.execute(new Job());
 
 通常我们是需要根据这批任务执行的性质来确定的。
 
-- IO 密集型任务：由于线程并不是一直在运行，所以可以尽可能的多配置线程，比如 CPU 个数 * 2 
+- IO 密集型任务：由于线程并不是一直在运行，所以可以尽可能的多配置线程，比如 CPU 个数 * 2
 - CPU 密集型任务（大量复杂的运算）应当分配较少的线程，比如 CPU 个数相当的大小。
 
 
@@ -207,16 +210,18 @@ public class TreadPoolConfig {
 
 其实 ThreadPool 本身已经提供了不少 api 可以获取线程状态：
 
-![](https://i.loli.net/2019/05/08/5cd1d2accbbcf.jpg)
+![](https://s2.loli.net/2024/05/21/8YJ9ULEWFfBqR2k.png)
+
 
 很多方法看名字就知道其含义，只需要将这些信息暴露到 SpringBoot 的监控端点中，我们就可以在可视化页面查看当前的线程池状态了。
 
 
 甚至我们可以继承线程池扩展其中的几个函数来自定义监控逻辑：
 
-![](https://i.loli.net/2019/05/08/5cd1d2add4d31.jpg)
+![](https://s2.loli.net/2024/05/21/l1YjPUmvFqeHW3n.png)
 
-![](https://i.loli.net/2019/05/08/5cd1d2aeea439.jpg)
+![](https://s2.loli.net/2024/05/21/jKGwm679LinTW3y.png)
+
 
 看这些名称和定义都知道，这是让子类来实现的。
 
@@ -384,7 +389,8 @@ public class CommandUser extends HystrixCommand<String> {
 
 运行结果：
 
-![](https://i.loli.net/2019/05/08/5cd1d2b06ef2d.jpg)
+![](https://s2.loli.net/2024/05/21/kJL2ZYFv4o6nP7y.png)
+
 
 可以看到两个任务分成了两个线程池运行，他们之间互不干扰。
 
@@ -398,7 +404,8 @@ public class CommandUser extends HystrixCommand<String> {
 
 通过刚才的构造函数也能证明：
 
-![](https://i.loli.net/2019/05/08/5cd1d2b69cd32.jpg)
+![](https://s2.loli.net/2024/05/21/uW1eDmV3CGipI2F.png)
+
 
 还要注意的一点是：
 
