@@ -31,7 +31,7 @@
 
 调试可以看到 `map` 的组成：
 
-![](https://ws2.sinaimg.cn/large/006tKfTcly1fo6l9xp91lj319m0s4tgi.jpg)
+![](https://i.loli.net/2019/05/08/5cd1ba2adf7c0.jpg)
 
 
 打开源码可以看到：
@@ -66,7 +66,7 @@
 
 上边的 demo 总结成一张图如下：
 
-![](https://ws1.sinaimg.cn/large/006tKfTcgy1fodggwc523j30za0n4wgj.jpg)
+![](https://i.loli.net/2019/05/08/5cd1ba2d418b6.jpg)
 
 第一个类似于 `HashMap` 的结构，利用 `Entry` 中的 `next` 指针进行关联。
 
